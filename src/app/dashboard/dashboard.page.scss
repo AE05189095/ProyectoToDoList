@@ -3,7 +3,7 @@ ion-content {
   --padding-end: 0;
   --padding-top: 0;
   --padding-bottom: 0;
-  // Fondo más claro para toda la página
+  /* Fondo más claro para toda la página */
   --background: #f9fafb;
 }
 
@@ -12,12 +12,12 @@ ion-content {
 }
 
 /* ============================ */
-/* HEADER                       */
+/* HEADER                      */
 /* ============================ */
 .header-box {
   background: #ffffff;
-  padding: 32px 24px 20px 24px; // Ajustado el padding inferior
-  // Eliminado el borde inferior para replicar el diseño
+  padding: 32px 24px 20px 24px; /* Ajustado el padding inferior */
+  /* Eliminado el borde inferior para replicar el diseño */
   text-align: left;
 }
 
@@ -25,7 +25,7 @@ ion-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4px; // Espacio entre el título y el subtítulo
+  margin-bottom: 4px; /* Espacio entre el título y el subtítulo */
 }
 
 .header-title {
@@ -35,19 +35,30 @@ ion-content {
 }
 
 .logout-btn {
-  background: transparent;
-  color: #9ca3af; // Color gris para la flecha
+  background: #ffffff; /* fondo blanco */
+  color: #6b7280; /* gris para la flecha y líneas */
   border-radius: 9999px;
-  padding: 8px; // Para hacer el área de clic más grande
-  transition: background 0.1s ease-in-out;
+  padding: 8px; /* Para hacer el área de clic más grande */
+  transition: background 0.1s ease-in-out, transform 0.1s ease-in-out;
+  /* border: 1px solid #f3f4f6; Eliminado el borde */
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .logout-btn:hover {
-  background: #f3f4f6;
+  background: #f3f4f6; /* Fondo gris muy claro al pasar el ratón */
 }
 
-.logout-btn ion-icon {
-  font-size: 24px; // Tamaño del ícono
+.logout-btn:active {
+  transform: scale(0.95); /* Efecto de "clic" */
+}
+
+.logout-btn svg {
+  stroke: currentColor;
+  fill: none;
+  width: 20px;
+  height: 20px;
 }
 
 .header-subtitle {
@@ -56,7 +67,7 @@ ion-content {
 }
 
 /* ============================ */
-/* DASHBOARD                    */
+/* DASHBOARD                   */
 /* ============================ */
 .dashboard-section {
   padding: 24px;
@@ -66,7 +77,7 @@ ion-content {
   font-size: 18px;
   margin-bottom: 16px;
   color: #374151;
-  font-weight: 500; // Ajustado peso de fuente
+  font-weight: 500; /* Ajustado peso de fuente */
 }
 
 .stats-grid {
@@ -77,13 +88,13 @@ ion-content {
 
 .stat-card {
   background: #ffffff;
-  border-radius: 12px; // Un poco más pequeño
+  border-radius: 12px; /* Un poco más pequeño */
   padding: 20px;
-  // Sombra y borde de la imagen
+  /* Sombra y borde de la imagen */
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   border: 1px solid #f3f4f6;
   transition: 0.2s;
-  display: block; // Importante para la alineación del texto
+  display: block; /* Importante para la alineación del texto */
   text-align: left;
 }
 
@@ -92,13 +103,13 @@ ion-content {
 }
 
 .stat-icon {
-  width: 44px; // Tamaño ajustado para coincidir
-  height: 44px; // Tamaño ajustado para coincidir
-  border-radius: 8px; // Ícono cuadrado con bordes redondeados
+  width: 44px; /* Tamaño ajustado para coincidir */
+  height: 44px; /* Tamaño ajustado para coincidir */
+  border-radius: 8px; /* Ícono cuadrado con bordes redondeados */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px; // Más espacio
+  margin-bottom: 16px; /* Más espacio */
 }
 
 .stat-icon ion-icon {
@@ -106,17 +117,17 @@ ion-content {
 }
 
 .orange {
-  background: #fff7ed; // Color de fondo más claro
-  color: #f97316; // Color del ícono más vivo
+  background: #fff7ed; /* Color de fondo más claro */
+  color: #f97316; /* Color del ícono más vivo */
 }
 
 .green {
-  background: #f0fdf4; // Color de fondo más claro
-  color: #22c55e; // Color del ícono más vivo
+  background: #f0fdf4; /* Color de fondo más claro */
+  color: #22c55e; /* Color del ícono más vivo */
 }
 
 .stat-value-container {
-  // Contenedor para alinear los valores
+  /* Contenedor para alinear los valores */
   display: block;
 }
 
@@ -129,32 +140,32 @@ ion-content {
 .stat-label {
   font-size: 14px;
   color: #6b7280;
-  margin-top: 4px; // Espacio entre valor y etiqueta
+  margin-top: 4px; /* Espacio entre valor y etiqueta */
 }
 
 /* ============================ */
-/* RECENT TASKS                 */
+/* RECENT TASKS                */
 /* ============================ */
 .recent-section {
-  margin-top: 32px; // Espacio superior
+  margin-top: 32px; /* Espacio superior */
 }
 
 .recent-list {
   background: #ffffff;
-  border-radius: 12px; // Bordes redondeados
+  border-radius: 12px; /* Bordes redondeados */
   border: 1px solid #f3f4f6;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  margin-bottom: 40px; // Espacio al final
+  margin-bottom: 40px; /* Espacio al final */
 }
 
 .recent-item {
   width: 100%;
   padding: 16px;
   display: flex;
-  gap: 16px; // Más espacio entre el ícono y el texto
+  gap: 16px; /* Más espacio entre el ícono y el texto */
   align-items: center;
-  border-bottom: 1px solid #f3f4f6; // Borde más sutil
+  border-bottom: 1px solid #f3f4f6; /* Borde más sutil */
   background: transparent;
   text-align: left;
   transition: background 0.1s ease-in-out;
@@ -168,28 +179,28 @@ ion-content {
   background: #fafafa;
 }
 
-// Estilo del texto de la tarea
+/* Estilo del texto de la tarea */
 .recent-item span {
   font-size: 16px;
   color: #1f2937;
   flex-grow: 1;
 }
 
-// Icono de tarea pendiente (radio-button-off-outline en el HTML)
+/* Icono de tarea pendiente (radio-button-off-outline en el HTML) */
 .pending-icon {
-  color: #9ca3af; // Gris
+  color: #9ca3af; /* Gris */
   font-size: 22px;
 }
 
-// Icono de tarea completada (checkmark-circle en el HTML)
+/* Icono de tarea completada (checkmark-circle en el HTML) */
 .completed-icon {
-  color: #22c55e; // Verde
+  color: #22c55e; /* Verde */
   font-size: 22px;
 }
 
 .completed-text {
   text-decoration: line-through;
-  color: #9ca3af !important; // Gris para el texto completado
+  color: #9ca3af !important; /* Gris para el texto completado */
 }
 
 /* ============================ */
@@ -197,17 +208,17 @@ ion-content {
 /* ============================ */
 .fab-container {
   position: fixed;
-  bottom: 30px; // Elevado del fondo
+  bottom: 30px; /* Elevado del fondo */
   left: 50%;
   transform: translateX(-50%);
-  width: 90%; // Ocupa un buen ancho
-  max-width: 300px; // Límite de ancho
+  width: 90%; /* Ocupa un buen ancho */
+  max-width: 300px; /* Límite de ancho */
   z-index: 10;
 }
 
 .add-task-btn {
   width: 100%;
-  background: #3b82f6; // Azul más estándar
+  background: #3b82f6; /* Azul más estándar */
   color: white;
   padding: 14px 24px;
   border-radius: 9999px;
@@ -218,7 +229,7 @@ ion-content {
   font-size: 16px;
   font-weight: 500;
   transition: 0.15s ease-in-out;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4); // Sombra azul
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4); /* Sombra azul */
 }
 
 .add-task-btn:hover {
@@ -226,7 +237,7 @@ ion-content {
 }
 
 .add-task-btn:active {
-  transform: scale(0.97) translateX(-50%); // Ajustado el transform para el centrado
+  transform: scale(0.97) translateX(-50%); /* Ajustado el transform para el centrado */
 }
 
 .add-task-btn ion-icon {

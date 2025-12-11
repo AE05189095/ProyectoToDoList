@@ -1,37 +1,60 @@
 /*
  * App Global CSS
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * Estilos globales aplicados a toda la app.
  */
 
-/* Core CSS required for Ionic components to work properly */
+/* Core CSS requerido para que Ionic funcione correctamente */
 @import "@ionic/angular/css/core.css";
 
-/* Basic CSS for apps built with Ionic */
+/* CSS base de Ionic */
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
 @import "@ionic/angular/css/display.css";
 
-/* Optional CSS utils that can be commented out */
+/* Utilidades opcionales */
 @import "@ionic/angular/css/padding.css";
 @import "@ionic/angular/css/float-elements.css";
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-/**
- * Ionic Dark Mode
- * -----------------------------------------------------
- * For more info, please see:
- * https://ionicframework.com/docs/theming/dark-mode
+/* 
+ * Desactivamos dark mode automático de Ionic
+ * ----------------------------------------------------------------------------
+ * Esto evita que la app cambie a modo oscuro según el sistema.
+ * SIEMPRE usará modo claro con fondo blanco real.
  */
 
-/* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* ❌ QUITADO: @import '@ionic/angular/css/palettes/dark.system.css'; */
+
+/* ✔ Reemplazo: Forzar modo claro */
+:root {
+  color-scheme: light;
+
+  /* Fondo blanco global */
+  --ion-background-color: #ffffff !important;
+  --ion-background-color-rgb: 255, 255, 255;
+
+  /* Texto oscuro elegante */
+  --ion-text-color: #1a1a1a;
+  --ion-text-color-rgb: 26, 26, 26;
+
+  /* Cards, items y toolbars blancos */
+  --ion-item-background: #ffffff;
+  --ion-card-background: #ffffff;
+  --ion-toolbar-background: #ffffff;
+
+  /* Modificar "light" para que realmente sea blanco */
+  --ion-color-light: #ffffff;
+  --ion-color-light-contrast: #1a1a1a;
+}
+
+/*
+ * Aplicamos fondo blanco también a nivel de estructura
+ * (evita que IonContent herede colores oscuros invisibles).
+ */
+html, body, ion-app, ion-content {
+  background: #ffffff !important;
+}

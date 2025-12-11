@@ -1,14 +1,16 @@
-<ion-header class="bg-card border-b border-border shadow-sm">
-  <ion-toolbar class="bg-card">
+<ion-header class="bg-white border-b border-gray-200">
+  <ion-toolbar class="bg-white">
     <ion-buttons slot="start">
-      <ion-button (click)="goBack()" color="primary">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
+      <div class="flex items-center">
+        <button class="back-btn p-2 -ml-2 rounded-full active:scale-95 transition-all hover:bg-gray-100" (click)="goBack()" aria-label="Back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-5 h-5 text-gray-700" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+        </button>
+        <div class="ml-2 text-gray-900" style="font-size:1rem;font-weight:500;">Task Details</div>
+      </div>
     </ion-buttons>
-    <ion-title class="text-foreground font-semibold">{{ currentTask?.name || 'Task Details' }}</ion-title>
-    
+
     <ion-buttons slot="end">
-      <ion-button *ngIf="!isEditing" (click)="enterEditMode()" color="primary">
+      <ion-button *ngIf="!isEditing && currentTask" (click)="enterEditMode()" color="primary">
         <ion-icon name="create-outline" slot="icon-only"></ion-icon>
       </ion-button>
       <ion-button *ngIf="isEditing" (click)="saveChanges()" color="success">
@@ -21,98 +23,138 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="bg-background px-6 py-6">
-  
-  <div *ngIf="currentTask" class="max-w-xl mx-auto bg-card rounded-2xl p-6 shadow-lg border border-border">
+<ion-content class="bg-gray-50 px-6 py-6" [class.pb-24]="currentTask && !isEditing">
 
+  <div *ngIf="currentTask" class="max-w-xl mx-auto space-y-6">
     <ng-container *ngIf="isEditing; else viewMode">
-        <form (ngSubmit)="saveChanges()">
-            
-            <h2 class="text-2xl font-bold text-foreground mb-6">Edit Task</h2>
+      <form (ngSubmit)="saveChanges()" class="space-y-6">
+        <div class="card-base">
+          <label for="name" class="card-label">Title</label>
+          <input
+            type="text"
+            [(ngModel)]="editableTask.name"
+            name="editName"
+            required
+            placeholder="Task Name"
+            class="w-full text-gray-900 focus:outline-none bg-transparent"
+          />
+        </div>
 
-            <div class="mb-5">
-              <label for="name" class="text-base font-medium text-foreground block mb-2">Task Name</label>
-              <input 
-                type="text" 
-                [(ngModel)]="editableTask.name" 
-                name="editName"
-                required
-                class="w-full p-3 bg-white border border-border rounded-lg text-foreground focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
-              />
-            </div>
-            
-            <div class="mb-5">
-              <label for="description" class="text-base font-medium text-foreground block mb-2">Description</label>
-              <textarea 
-                [(ngModel)]="editableTask.description" 
-                name="editDescription"
-                rows="4"
-                class="w-full p-3 bg-white border border-border rounded-lg text-foreground focus:outline-none focus:ring-1 focus:ring-primary shadow-sm resize-none"
-              ></textarea>
-            </div>
-            
-            <div class="mb-8">
-              <label for="type" class="text-base font-medium text-foreground block mb-2">Task Type</label>
-              <ion-select 
-                aria-label="Task Type" 
-                placeholder="Select a type" 
-                [(ngModel)]="editableTask.type"
-                name="editType"
-                interface="popover"
-                class="w-full p-2 h-12 bg-white border border-border rounded-lg text-foreground focus:outline-none focus:ring-1 focus:ring-primary shadow-sm custom-select"
-              >
-                <ion-select-option *ngFor="let type of taskTypes" [value]="type">{{ type | titlecase }}</ion-select-option>
-              </ion-select>
-            </div>
-            
-            </form>
+        <div class="card-base">
+          <label for="description" class="card-label">Description</label>
+          <textarea
+            [(ngModel)]="editableTask.description"
+            name="editDescription"
+            rows="4"
+            placeholder="No description provided"
+            class="w-full text-gray-900 focus:outline-none bg-transparent resize-none"
+          ></textarea>
+        </div>
+
+        <div class="card-base">
+          <label for="type" class="card-label">Type</label>
+          <ion-select
+            aria-label="Task Type"
+            placeholder="Select a type"
+            [(ngModel)]="editableTask.type"
+            name="editType"
+            interface="popover"
+            class="w-full p-0 h-auto text-gray-900 custom-select"
+          >
+            <ion-select-option *ngFor="let type of taskTypes" [value]="type">{{ type | titlecase }}</ion-select-option>
+          </ion-select>
+        </div>
+
+        <div class="card-base flex items-center justify-between">
+          <span class="card-label">Completion Status</span>
+          <ion-chip class="font-medium text-sm px-3 py-1 rounded-full"
+            [ngClass]="editableTask.completed ? 'bg-green-100 text-green-600' : 'bg-orange-100 text-orange-600'">
+            <ion-icon [name]="editableTask.completed ? 'checkmark-circle' : 'time-outline'" class="mr-1"></ion-icon>
+            {{ editableTask.completed ? 'Completed' : 'Pending' }}
+          </ion-chip>
+        </div>
+
+        <ion-button expand="block" type="submit" color="success" class="mt-8 rounded-xl active:scale-98 transition-all">
+          <ion-icon name="save-outline" slot="start"></ion-icon>
+          Save Changes
+        </ion-button>
+        
+        <!-- Delete button removed; actions moved to bottom action bar -->
+      </form>
     </ng-container>
 
     <ng-template #viewMode>
-        <div class="mb-6">
-            <h1 class="text-3xl font-extrabold text-foreground mb-2">{{ currentTask.name }}</h1>
-            
-            <div class="flex items-center gap-3 mb-4">
-                <ion-chip class="bg-primary text-primary-foreground font-medium text-sm px-3 py-1 rounded-full">
-                    {{ currentTask.type | titlecase }}
-                </ion-chip>
-                <ion-chip class="font-medium text-sm px-3 py-1 rounded-full"
-                    [ngClass]="currentTask.completed ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'">
-                    {{ currentTask.completed ? 'Completed' : 'Pending' }}
-                </ion-chip>
+      
+      <div class="card-base">
+        <p class="card-label mb-2">Title</p>
+        <h2 class="text-gray-900">{{ currentTask.name }}</h2>
+      </div>
+
+      <div class="card-base">
+        <p class="card-label mb-2">Description</p>
+        <p [ngClass]="currentTask.description ? 'text-gray-900' : 'text-gray-400 italic'">
+          {{ currentTask.description || 'No description provided' }}
+        </p>
+      </div>
+
+      <div class="card-base">
+        <p class="card-label mb-2">Type</p>
+          <ng-container *ngIf="currentTask.type; else noType">
+          <span class="inline-block px-4 py-2 bg-blue-50 text-blue-600 rounded-lg type-badge">
+            {{ currentTask.type | titlecase }}
+          </span>
+        </ng-container>
+        <ng-template #noType>
+          <p class="text-gray-400 italic">No type assigned</p>
+        </ng-template>
+      </div>
+
+      <div class="card-base">
+        <p class="card-label mb-3">Completion Status</p>
+        <div class="flex items-center gap-3">
+          <ng-container *ngIf="!currentTask.completed">
+            <div class="status-icon-wrapper flex items-center justify-center w-12 h-12 rounded-full bg-orange-100">
+              <!-- XCircle (lucide-style) - stroke set to Tailwind orange-600 #f97316 -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M15 9l-6 6M9 9l6 6"></path>
+              </svg>
             </div>
+            <div>
+              <div class="text-orange-700" style="color:#ea580c !important;">Pending</div>
+              <div class="text-gray-500 text-sm">This task is not yet complete</div>
+            </div>
+          </ng-container>
 
-            <p class="text-muted-foreground text-sm">Created: {{ currentTask.createdAt | date:'medium' }}</p>
+          <ng-container *ngIf="currentTask.completed">
+            <div class="status-icon-wrapper status-icon-wrapper--green flex items-center justify-center w-12 h-12 rounded-full bg-green-100">
+              <!-- CheckCircle2 (lucide-style) -->
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M9 12l2 2 4-4"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="text-green-600">Completed</div>
+              <div class="text-gray-500 text-sm">This task has been finished</div>
+            </div>
+          </ng-container>
         </div>
-
-        <div class="border-t border-border pt-6 mb-6">
-            <h3 class="text-lg font-semibold text-foreground mb-3">Description</h3>
-            <p class="text-foreground whitespace-pre-wrap">{{ currentTask.description || 'No description provided.' }}</p>
-        </div>
-
-        <div class="flex flex-col gap-4 pt-4 border-t border-border">
-            <button 
-                (click)="toggleCompleted()"
-                class="w-full py-3 px-4 font-medium rounded-lg transition duration-150"
-                [ngClass]="currentTask.completed ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-green-500 hover:bg-green-600 text-white'"
-            >
-                <ion-icon [name]="currentTask.completed ? 'refresh-outline' : 'checkmark-done-outline'" slot="start" class="mr-2"></ion-icon>
-                {{ currentTask.completed ? 'Mark as Pending' : 'Mark as Completed' }}
-            </button>
-            
-            <button 
-                (click)="deleteTask()"
-                class="w-full py-3 px-4 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition duration-150"
-            >
-                <ion-icon name="trash-outline" slot="start" class="mr-2"></ion-icon>
-                Delete Task
-            </button>
-        </div>
+      </div>
+      
+      <!-- Removed top delete button; actions available in bottom action bar -->
     </ng-template>
   </div>
-  
-  <div *ngIf="!currentTask" class="p-6 text-center text-muted-foreground">
-      <p>Task not found.</p>
-  </div>
 
+  <div *ngIf="!currentTask" class="p-6 text-center text-gray-500">
+    <p>Task not found. Redirecting...</p>
+  </div>
 </ion-content>
+
+<div class="fixed-action" *ngIf="currentTask && !isEditing">
+  <div class="action-row">
+    <button class="action-btn btn-danger" (click)="deleteTask()">Delete</button>
+    <button class="action-btn btn-complete" (click)="toggleCompleted()">Complete</button>
+    <button class="action-btn btn-edit" (click)="enterEditMode()">Edit</button>
+  </div>
+</div>

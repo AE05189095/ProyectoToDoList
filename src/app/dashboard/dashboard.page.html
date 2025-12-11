@@ -5,7 +5,7 @@
       <div class="header-top">
         <h1 class="header-title">My Tasks</h1>
 
-        <button (click)="logout()" class="p-2 hover:bg-gray-100 rounded-lg active:scale-95 transition-all flex items-center gap-2 text-gray-600" title="Logout">
+        <button (click)="logout()" class="logout-btn" title="Logout">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out w-5 h-5" aria-hidden="true"><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path></svg>
         </button>
       </div>
@@ -50,7 +50,7 @@
           <button
             *ngFor="let t of tasks().slice(0, 5)"
             class="recent-item"
-            (click)="toggleTask(t)"
+            (click)="openDetails(t.id)"
           >
             <ion-icon
               [name]="t.completed ? 'checkmark-circle' : 'radio-button-off-outline'"
