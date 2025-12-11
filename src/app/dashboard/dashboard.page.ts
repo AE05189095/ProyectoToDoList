@@ -57,6 +57,10 @@ export class DashboardPage {
     this.taskService.toggleCompleted(task.id);
   }
 
+  openDetails(id: number) {
+    this.router.navigateByUrl(`/tabs/details/${id}`);
+  }
+
   // Se elimina la función deleteTask ya que no es necesaria para replicar la vista de la imagen
   // deleteTask(id: number) {
   //   this.taskService.deleteTask(id);
