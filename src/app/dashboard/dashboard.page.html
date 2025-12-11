@@ -1,0 +1,77 @@
+<ion-content [fullscreen]="true">
+  <div class="page-wrapper">
+
+    <div class="header-box">
+      <div class="header-top">
+        <h1 class="header-title">My Tasks</h1>
+
+        <button (click)="logout()" class="p-2 hover:bg-gray-100 rounded-lg active:scale-95 transition-all flex items-center gap-2 text-gray-600" title="Logout">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out w-5 h-5" aria-hidden="true"><path d="m16 17 5-5-5-5"></path><path d="M21 12H9"></path><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path></svg>
+        </button>
+      </div>
+
+      <p class="header-subtitle">Keep track of your daily tasks</p>
+    </div>
+
+    <div class="dashboard-section">
+
+      <h2 class="section-title">Dashboard</h2>
+
+      <div class="stats-grid">
+
+        <button class="stat-card">
+          <div class="stat-icon orange">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-6 h-6 text-orange-600" aria-hidden="true"><path d="M12 6v6l4 2"></path><circle cx="12" cy="12" r="10"></circle></svg>
+          </div>
+
+          <div class="stat-value-container">
+            <div class="stat-value">{{ pendingCount }}</div>
+            <div class="stat-label">Pending</div>
+          </div>
+        </button>
+
+        <div class="stat-card">
+          <div class="stat-icon green">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check w-6 h-6 text-green-600" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+          </div>
+
+          <div class="stat-value-container">
+            <div class="stat-value">{{ completedCount }}</div>
+            <div class="stat-label">Completed</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="recent-section">
+        <h3 class="section-title">Recent Tasks</h3>
+
+        <div class="recent-list">
+          <button
+            *ngFor="let t of tasks().slice(0, 5)"
+            class="recent-item"
+            (click)="toggleTask(t)"
+          >
+            <ion-icon
+              [name]="t.completed ? 'checkmark-circle' : 'radio-button-off-outline'"
+              [class.completed-icon]="t.completed"
+              [class.pending-icon]="!t.completed"
+            ></ion-icon>
+
+            <span [class.completed-text]="t.completed">
+              {{ t.name }}
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    <div class="fab-container">
+    <button class="add-task-btn" (click)="router.navigateByUrl('/tabs/add')">
+      <span class="add-symbol" aria-hidden="true">+</span>&nbsp;Add New Task
+    </button>
+  </div>
+
+</ion-content>

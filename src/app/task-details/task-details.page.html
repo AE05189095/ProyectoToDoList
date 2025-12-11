@@ -1,0 +1,118 @@
+<ion-header class="bg-card border-b border-border shadow-sm">
+  <ion-toolbar class="bg-card">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()" color="primary">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="text-foreground font-semibold">{{ currentTask?.name || 'Task Details' }}</ion-title>
+    
+    <ion-buttons slot="end">
+      <ion-button *ngIf="!isEditing" (click)="enterEditMode()" color="primary">
+        <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isEditing" (click)="saveChanges()" color="success">
+        <ion-icon name="save-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+      <ion-button *ngIf="isEditing" (click)="cancelEdit()" color="danger">
+        <ion-icon name="close-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-background px-6 py-6">
+  
+  <div *ngIf="currentTask" class="max-w-xl mx-auto bg-card rounded-2xl p-6 shadow-lg border border-border">
+
+    <ng-container *ngIf="isEditing; else viewMode">
+        <form (ngSubmit)="saveChanges()">
+            
+            <h2 class="text-2xl font-bold text-foreground mb-6">Edit Task</h2>
+
+            <div class="mb-5">
+              <label for="name" class="text-base font-medium text-foreground block mb-2">Task Name</label>
+              <input 
+                type="text" 
+                [(ngModel)]="editableTask.name" 
+                name="editName"
+                required
+                class="w-full p-3 bg-white border border-border rounded-lg text-foreground focus:outline-none focus:ring-1 focus:ring-primary shadow-sm"
+              />
+            </div>
+            
+            <div class="mb-5">
+              <label for="description" class="text-base font-medium text-foreground block mb-2">Description</label>
+              <textarea 
+                [(ngModel)]="editableTask.description" 
+                name="editDescription"
+                rows="4"
+                class="w-full p-3 bg-white border border-border rounded-lg text-foreground focus:outline-none focus:ring-1 focus:ring-primary shadow-sm resize-none"
+              ></textarea>
+            </div>
+            
+            <div class="mb-8">
+              <label for="type" class="text-base font-medium text-foreground block mb-2">Task Type</label>
+              <ion-select 
+                aria-label="Task Type" 
+                placeholder="Select a type" 
+                [(ngModel)]="editableTask.type"
+                name="editType"
+                interface="popover"
+                class="w-full p-2 h-12 bg-white border border-border rounded-lg text-foreground focus:outline-none focus:ring-1 focus:ring-primary shadow-sm custom-select"
+              >
+                <ion-select-option *ngFor="let type of taskTypes" [value]="type">{{ type | titlecase }}</ion-select-option>
+              </ion-select>
+            </div>
+            
+            </form>
+    </ng-container>
+
+    <ng-template #viewMode>
+        <div class="mb-6">
+            <h1 class="text-3xl font-extrabold text-foreground mb-2">{{ currentTask.name }}</h1>
+            
+            <div class="flex items-center gap-3 mb-4">
+                <ion-chip class="bg-primary text-primary-foreground font-medium text-sm px-3 py-1 rounded-full">
+                    {{ currentTask.type | titlecase }}
+                </ion-chip>
+                <ion-chip class="font-medium text-sm px-3 py-1 rounded-full"
+                    [ngClass]="currentTask.completed ? 'bg-green-100 text-green-700' : 'bg-orange-100 text-orange-700'">
+                    {{ currentTask.completed ? 'Completed' : 'Pending' }}
+                </ion-chip>
+            </div>
+
+            <p class="text-muted-foreground text-sm">Created: {{ currentTask.createdAt | date:'medium' }}</p>
+        </div>
+
+        <div class="border-t border-border pt-6 mb-6">
+            <h3 class="text-lg font-semibold text-foreground mb-3">Description</h3>
+            <p class="text-foreground whitespace-pre-wrap">{{ currentTask.description || 'No description provided.' }}</p>
+        </div>
+
+        <div class="flex flex-col gap-4 pt-4 border-t border-border">
+            <button 
+                (click)="toggleCompleted()"
+                class="w-full py-3 px-4 font-medium rounded-lg transition duration-150"
+                [ngClass]="currentTask.completed ? 'bg-orange-500 hover:bg-orange-600 text-white' : 'bg-green-500 hover:bg-green-600 text-white'"
+            >
+                <ion-icon [name]="currentTask.completed ? 'refresh-outline' : 'checkmark-done-outline'" slot="start" class="mr-2"></ion-icon>
+                {{ currentTask.completed ? 'Mark as Pending' : 'Mark as Completed' }}
+            </button>
+            
+            <button 
+                (click)="deleteTask()"
+                class="w-full py-3 px-4 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition duration-150"
+            >
+                <ion-icon name="trash-outline" slot="start" class="mr-2"></ion-icon>
+                Delete Task
+            </button>
+        </div>
+    </ng-template>
+  </div>
+  
+  <div *ngIf="!currentTask" class="p-6 text-center text-muted-foreground">
+      <p>Task not found.</p>
+  </div>
+
+</ion-content>

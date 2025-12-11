@@ -1,0 +1,115 @@
+/* Styles for Add Task page */
+.add-task-page {
+	--bg: #f9fafb;
+}
+
+.page-root {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.header {
+	background: #ffffff;
+	border-bottom: 1px solid #e5e7eb;
+}
+
+.header-inner {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 16px;
+}
+
+.back-btn {
+	background: transparent;
+	border: none;
+	padding: 6px;
+	border-radius: 999px;
+}
+
+/* Force svg icon and button to render in black */
+.back-btn svg {
+  color: #000000;
+  stroke: currentColor;
+  fill: none;
+}
+
+.header-title {
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #111827;
+}
+
+.content {
+	padding: 20px;
+	padding-bottom: 92px; /* leave room for save bar */
+	background: var(--bg);
+	flex: 1 1 auto;
+}
+
+.field { margin-bottom: 18px; }
+.label { display: block; color: #374151; margin-bottom: 8px; }
+.input {
+	width: 100%;
+	padding: 12px 14px;
+	border-radius: 12px;
+	border: 1px solid #e5e7eb;
+	background: #ffffff;
+	outline: none;
+	color: #000000; /* typed text color */
+}
+.textarea {
+	width: 100%;
+	padding: 12px 14px;
+	border-radius: 12px;
+	border: 1px solid #e5e7eb;
+	background: #ffffff;
+	resize: none;
+	color: #000000; /* typed text color */
+}
+
+/* placeholder color for readability */
+.input::placeholder,
+.textarea::placeholder {
+  color: #9ca3af;
+}
+
+.types-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+}
+.type-btn {
+	padding: 12px 10px;
+	border-radius: 12px;
+	border: 2px solid #e5e7eb;
+	background: #ffffff;
+	color: #374151;
+}
+.type-btn.selected {
+	border-color: #2563eb;
+	background: #eff6ff;
+	color: #2563eb;
+}
+
+.save-bar {
+	position: fixed;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 16px;
+	background: #ffffff;
+	border-top: 1px solid #e5e7eb;
+}
+.save-btn {
+	width: 100%;
+	background: #2563eb;
+	color: white;
+	padding: 14px;
+	border-radius: 12px;
+	border: none;
+	font-weight: 600;
+}
+.save-btn:disabled { background: #d1d5db; cursor: not-allowed; }
+

@@ -1,0 +1,47 @@
+<ion-content [fullscreen]="true" class="add-task-page">
+  <div class="page-root">
+
+    <!-- Header -->
+    <div class="header bg-white border-b">
+      <div class="header-inner">
+        <button class="back-btn" (click)="cancel()" aria-label="Back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-5 h-5 text-gray-700" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+        </button>
+        <h1 class="header-title">Add New Task</h1>
+      </div>
+    </div>
+
+    <!-- Form Content -->
+    <div class="content px">
+
+      <!-- Title -->
+      <div class="field">
+        <label class="label">Title</label>
+        <input name="title" type="text" [(ngModel)]="title" placeholder="Enter task title" class="input" />
+      </div>
+
+      <!-- Description -->
+      <div class="field">
+        <label class="label">Description</label>
+        <textarea name="description" rows="4" [(ngModel)]="description" placeholder="Enter task description (optional)" class="textarea"></textarea>
+      </div>
+
+      <!-- Type Selection -->
+      <div class="field">
+        <label class="label">Type</label>
+        <div class="types-grid">
+          <button *ngFor="let type of taskTypes" (click)="selectedType = type" [class.selected]="selectedType === type" class="type-btn">
+            {{ type }}
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Save Button fixed bottom -->
+    <div class="save-bar">
+      <button (click)="saveTask()" [disabled]="!(title.trim() && description.trim())" class="save-btn">Save Task</button>
+    </div>
+
+  </div>
+</ion-content>

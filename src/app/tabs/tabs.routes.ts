@@ -3,34 +3,31 @@ import { TabsPage } from './tabs.page';
 
 export const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
-        loadComponent: () =>
-          import('../tab1/tab1.page').then((m) => m.Tab1Page),
+        path: 'dashboard', // NUEVO NOMBRE DE RUTA
+        loadComponent: () => import('../dashboard/dashboard.page').then((m) => m.DashboardPage), // RUTA ACTUALIZADA
       },
       {
-        path: 'tab2',
-        loadComponent: () =>
-          import('../tab2/tab2.page').then((m) => m.Tab2Page),
+        path: 'add', // Ruta para la página de agregar tarea
+        loadComponent: () => import('../add-task/add-task.page').then((m) => m.AddTaskPage),
       },
       {
-        path: 'tab3',
-        loadComponent: () =>
-          import('../tab3/tab3.page').then((m) => m.Tab3Page),
+        path: 'details/:id', // Ruta de detalles (no es una pestaña, pero vive dentro de 'tabs')
+        loadComponent: () => import('../task-details/task-details.page').then((m) => m.TaskDetailsPage),
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/dashboard',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/dashboard',
     pathMatch: 'full',
   },
 ];

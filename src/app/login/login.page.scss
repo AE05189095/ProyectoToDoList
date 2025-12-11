@@ -1,0 +1,125 @@
+/* Fondo 100% blanco */
+.login-content,
+ion-content,
+:host {
+  --background: #ffffff !important;
+  background: #ffffff !important;
+}
+
+/* === Centramos todo el contenido en pantalla === */
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* Contenedor interno */
+.container {
+  width: 100%;
+  max-width: 380px;
+  padding: 1.5rem;
+  text-align: center;
+  background: #ffffff;
+}
+
+/* HEADER */
+.logo-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.logo-title svg {
+  width: 42px;
+  height: 42px;
+  color: #2563eb;
+}
+
+.title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+  color: #6b7280;
+}
+
+/* FORMULARIO */
+.form-block {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  text-align: left;
+}
+
+.label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* === INPUTS CORREGIDOS (texto negro, placeholder gris, autofill) === */
+.login-input {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  font-size: 1rem;
+
+  color: #111827 !important;        /* texto negro */
+  caret-color: #111827 !important;   /* cursor negro */
+}
+
+.login-input::placeholder {
+  color: #9ca3af !important;         /* gris suave */
+}
+
+/* Autofill de Chrome */
+input:-webkit-autofill {
+  -webkit-text-fill-color: #111827 !important;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+/* BOTÓN LOGIN */
+.login-button {
+  margin-top: 0.6rem;
+  width: 100%;
+  padding: 1rem;
+  background: #2563eb;
+  color: white;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Links centrados */
+.extra-links {
+  margin-top: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+.separator {
+  color: #9ca3af;
+}
