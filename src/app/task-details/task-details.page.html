@@ -2,8 +2,15 @@
   <ion-toolbar class="bg-white">
     <ion-buttons slot="start">
       <div class="flex items-center">
-        <button class="back-btn p-2 -ml-2 rounded-full active:scale-95 transition-all hover:bg-gray-100" (click)="goBack()" aria-label="Back">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left w-5 h-5 text-gray-700" aria-hidden="true"><path d="m12 19-7-7 7-7"></path><path d="M19 12H5"></path></svg>
+        <button class="back-btn p-2 -ml-2 rounded-full active:scale-95 transition-all hover:bg-gray-100"
+                (click)="goBack()" aria-label="Back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="lucide lucide-arrow-left w-5 h-5 text-gray-700">
+            <path d="m12 19-7-7 7-7"></path>
+            <path d="M19 12H5"></path>
+          </svg>
         </button>
         <div class="ml-2 text-gray-900" style="font-size:1rem;font-weight:500;">Task Details</div>
       </div>
@@ -13,9 +20,11 @@
       <ion-button *ngIf="!isEditing && currentTask" (click)="enterEditMode()" color="primary">
         <ion-icon name="create-outline" slot="icon-only"></ion-icon>
       </ion-button>
+
       <ion-button *ngIf="isEditing" (click)="saveChanges()" color="success">
         <ion-icon name="save-outline" slot="icon-only"></ion-icon>
       </ion-button>
+
       <ion-button *ngIf="isEditing" (click)="cancelEdit()" color="danger">
         <ion-icon name="close-outline" slot="icon-only"></ion-icon>
       </ion-button>
@@ -78,8 +87,6 @@
           <ion-icon name="save-outline" slot="start"></ion-icon>
           Save Changes
         </ion-button>
-        
-        <!-- Delete button removed; actions moved to bottom action bar -->
       </form>
     </ng-container>
 
@@ -112,9 +119,10 @@
       <div class="card-base">
         <p class="card-label mb-3">Completion Status</p>
         <div class="flex items-center gap-3">
+          
+          <!-- PENDING -->
           <ng-container *ngIf="!currentTask.completed">
             <div class="status-icon-wrapper flex items-center justify-center w-12 h-12 rounded-full bg-orange-100">
-              <!-- XCircle (lucide-style) - stroke set to Tailwind orange-600 #f97316 -->
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="M15 9l-6 6M9 9l6 6"></path>
@@ -126,35 +134,38 @@
             </div>
           </ng-container>
 
+          <!-- COMPLETED -->
           <ng-container *ngIf="currentTask.completed">
             <div class="status-icon-wrapper status-icon-wrapper--green flex items-center justify-center w-12 h-12 rounded-full bg-green-100">
-              <!-- CheckCircle2 (lucide-style) -->
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="#28A745" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="10"></circle>
                 <path d="M9 12l2 2 4-4"></path>
               </svg>
             </div>
             <div>
-              <div class="text-green-600">Completed</div>
+              <!-- 🔥 TEXTO VERDE FINAL ✔ -->
+              <div class="text-green-600 font-medium" style="color:#28A745 !important;">
+                Completed
+              </div>
               <div class="text-gray-500 text-sm">This task has been finished</div>
             </div>
           </ng-container>
+
         </div>
       </div>
-      
-      <!-- Removed top delete button; actions available in bottom action bar -->
     </ng-template>
   </div>
 
   <div *ngIf="!currentTask" class="p-6 text-center text-gray-500">
     <p>Task not found. Redirecting...</p>
   </div>
+
 </ion-content>
 
 <div class="fixed-action" *ngIf="currentTask && !isEditing">
   <div class="action-row">
     <button class="action-btn btn-danger" (click)="deleteTask()">Delete</button>
-    <button class="action-btn btn-complete" (click)="toggleCompleted()">Complete</button>
+    <button *ngIf="!currentTask.completed" class="action-btn btn-complete" (click)="toggleCompleted()">Complete</button>
     <button class="action-btn btn-edit" (click)="enterEditMode()">Edit</button>
   </div>
 </div>

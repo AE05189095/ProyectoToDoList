@@ -1,7 +1,7 @@
 /* Styles for Task Details page */
 
 :host {
-    display: block;
+  display: block;
 }
 
 /* Force light color-scheme to avoid inheriting a dark theme */
@@ -13,6 +13,7 @@
 ion-content {
   color: var(--text-gray-900);
 }
+
 ion-header, ion-toolbar, ion-title, ion-button, ion-icon {
   color: var(--text-gray-900);
 }
@@ -39,7 +40,6 @@ ion-header, ion-toolbar, ion-title, ion-button, ion-icon {
   --text-orange-600: #f97316; /* Color de Pending (Tailwind orange-600) */
   --text-orange-700: #ea580c; /* Slightly more intense orange (Tailwind orange-700) */
 }
-
 
 /* Estilos Globales de la Vista */
 .bg-gray-50 { background-color: var(--bg-gray-50); }
@@ -69,10 +69,7 @@ ion-header, ion-toolbar, ion-title, ion-button, ion-icon {
 }
 
 /* Ensure the Pending label uses the more intense orange even if other rules apply */
-.card-base .text-orange-700 {
-  color: var(--text-orange-700) !important;
-}
-
+.card-base .text-orange-700 { color: var(--text-orange-700) !important; }
 
 /* Card Styling (rounded-2xl, shadow-sm, border border-gray-100, p-5) */
 .card-base {
@@ -108,7 +105,7 @@ ion-header {
     border-bottom: 1px solid var(--border-gray-200);
   }
   ion-toolbar {
-    --background: var(--bg-white);
+    --background: var(--bg_white);
     --border-width: 0;
     padding: 0 8px; /* Ajuste para el botón de retroceso -ml-2 */
 
@@ -223,94 +220,36 @@ ion-content {
   filter: blur(6px);
   z-index: 0;
 }
-.status-icon-wrapper--green::before {
-  background: var(--text-green-600);
-  opacity: 0.08;
-}
-.status-icon-wrapper svg {
-  position: relative;
-  z-index: 1;
-}
+.status-icon-wrapper--green::before { background: var(--text-green-600); opacity: 0.08; }
+.status-icon-wrapper svg { position: relative; z-index: 1; }
 
 /* Smaller delete button to match fixed action size */
-.small-delete {
-  --padding-top: 12px !important;
-  --padding-bottom: 12px !important;
-  --padding-start: 18px !important;
-  --padding-end: 18px !important;
-  font-weight: 600;
-}
-
-.delete-lower {
-  margin-top: 16px;
-}
+.small-delete { --padding-top: 12px !important; --padding-bottom: 12px !important; --padding-start: 18px !important; --padding-end: 18px !important; font-weight: 600; }
+.delete-lower { margin-top: 16px; }
 
 /* Black back button styles */
-ion-button.btn-black {
-  --background: #000000;
-  --background-activated: #000000;
-  --background-focused: #000000;
-  color: #ffffff;
-  --color: #ffffff;
-  border: none;
-}
-ion-button.btn-black .button-inner,
-ion-button.btn-black .button-native {
-  color: #ffffff;
-}
-ion-button.btn-black ion-icon {
-  color: #ffffff;
-}
+ion-button.btn-black { --background: #000000; --background-activated: #000000; --background-focused: #000000; color: #ffffff; --color: #ffffff; border: none; }
+ion-button.btn-black .button-inner, ion-button.btn-black .button-native { color: #ffffff; }
+ion-button.btn-black ion-icon { color: #ffffff; }
 
 /* Back button style (match Add Task) */
-.back-btn {
-  background: transparent;
-  border: none;
-  padding: 6px;
-  border-radius: 999px;
-}
-.back-btn svg {
-  color: #000000;
-  stroke: currentColor;
-  fill: none;
-}
+.back-btn { background: transparent; border: none; padding: 6px; border-radius: 999px; }
+.back-btn svg { color: #000000; stroke: currentColor; fill: none; }
 
 /* Bottom action row with three buttons */
-.action-row {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-  max-width: 720px;
-  margin: 0 auto;
-}
-.action-btn {
-  flex: 1;
-  padding: 12px 14px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-}
-.action-btn.btn-danger {
-  background: #dc2626; /* red-600 */
-  color: #ffffff;
-  border: none;
-}
-.action-btn.btn-danger:hover {
-  background: #b91c1c; /* red-700 */
-}
-.action-btn.btn-complete {
-  background: #16a34a; /* green-600 */
-  color: #ffffff;
-}
-.action-btn.btn-complete:hover {
-  background: #15803d; /* green-700 */
-}
-.action-btn.btn-edit {
-  background: #2563eb; /* blue-600 */
-  color: #ffffff;
-}
-.action-btn.btn-edit:hover {
-  background: #1d4ed8; /* blue-700 */
-}
+.action-row { display: flex; gap: 12px; width: 100%; max-width: 720px; margin: 0 auto; justify-content: center; /* center the buttons in the fixed bar */ }
+.action-btn { /* Default: buttons expand evenly to fit small screens */ flex: 1 1 0; padding: 10px 8px; /* smaller padding so buttons fit on narrow screens */ border-radius: 12px; font-weight: 600; font-size: 14px; cursor: pointer; border: none; min-width: 0; /* allow buttons to shrink properly */ overflow: hidden; text-overflow: ellipsis; }
+@media (min-width: 720px) { .action-btn { flex: 0 0 160px; } }
+
+
+/* Ensure completed label text is green and not overridden */
+.card-base .text-green-600 { color: var(--text-green-600) !important; }
+
+.action-btn.btn-danger { background: #dc2626; /* red-600 */ color: #ffffff; border: none; }
+.action-btn.btn-danger:hover { background: #b91c1c; /* red-700 */ }
+.action-btn.btn-complete { background: #16a34a; /* green-600 */ color: #ffffff; }
+.action-btn.btn-complete:hover { background: #15803d; /* green-700 */ }
+.action-btn.btn-edit { background: #2563eb; /* blue-600 */ color: #ffffff; }
+.action-btn.btn-edit:hover { background: #1d4ed8; /* blue-700 */ }
+
+/* Tailwind puede interferir → por eso forcé !important solo aquí */

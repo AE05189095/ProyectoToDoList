@@ -53,6 +53,10 @@ export class DashboardPage {
     return this.tasks().filter(t => t.completed).length;
   }
 
+  get deletedCount(): number {
+    return this.taskService.deleted().length;
+  }
+
   toggleTask(task: Task) {
     this.taskService.toggleCompleted(task.id);
   }

@@ -32,4 +32,10 @@ export class AddTaskPage {
     this.router.navigateByUrl('/tabs/dashboard');
   }
 
+  // Reset form fields when the page becomes active (handles cached pages)
+  ionViewWillEnter() {
+    this.title = '';
+    this.description = '';
+    this.selectedType = 'Work';
+  }
 }

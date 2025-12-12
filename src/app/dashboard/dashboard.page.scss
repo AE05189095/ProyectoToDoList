@@ -82,7 +82,7 @@ ion-content {
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 }
 
@@ -124,6 +124,11 @@ ion-content {
 .green {
   background: #f0fdf4; /* Color de fondo más claro */
   color: #22c55e; /* Color del ícono más vivo */
+}
+
+.red {
+  background: #fff1f2; /* soft red background */
+  color: #ef4444; /* red icon color */
 }
 
 .stat-value-container {
