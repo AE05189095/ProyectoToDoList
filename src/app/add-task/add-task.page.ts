@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/angular/standalone';
 import { TaskService } from '../services/task.service';
+import { Task } from '../interfaces/task.interface';
 
 @Component({
   selector: 'app-add-task',
@@ -16,15 +17,15 @@ export class AddTaskPage {
 
   title: string = '';
   description: string = '';
-  selectedType: string = 'Work';
-  taskTypes = ['Work', 'Home', 'Business'];
+  selectedType: Task['type'] = 'Work';
+  taskTypes: Task['type'][] = ['Work', 'Home', 'Business'];
 
   constructor(private taskService: TaskService, private router: Router) {}
 
   saveTask() {
     // Require title and some description text before saving
     if (!this.title.trim() || !this.description.trim()) return;
-    this.taskService.addTask(this.title.trim(), this.description.trim(), this.selectedType as any);
+    this.taskService.addTask(this.title.trim(), this.description.trim(), this.selectedType);
     this.router.navigateByUrl('/tabs/dashboard');
   }
 
