@@ -65,6 +65,10 @@ export class LoginPage implements OnInit {
     if (this.taskService.verifyUser(this.username, this.password)) {
       // REQUISITO 3: Login exitoso
       localStorage.setItem('isAuthenticated', 'true');
+      // Guardar el usuario actual para que TaskService use su propio storage
+      localStorage.setItem('todolist_current_user', this.username);
+      // Recargar las tareas para este usuario
+      this.taskService.reloadForCurrentUser();
       this.router.navigateByUrl('/tabs/dashboard', { replaceUrl: true });
     } else {
       // REQUISITO 4: Credenciales incorrectas

@@ -38,6 +38,11 @@ export class DashboardPage {
   taskService = inject(TaskService);
   router = inject(Router);
 
+  constructor() {
+    // Asegurarnos de cargar las tareas del usuario actual al entrar al dashboard
+    this.taskService.reloadForCurrentUser();
+  }
+
   // tasks es una señal
   tasks = this.taskService.tasks;
 
@@ -72,6 +77,9 @@ export class DashboardPage {
 
   logout() {
     localStorage.removeItem('isAuthenticated');
+    // Remove current user and reload tasks to avoid showing other user's data
+    localStorage.removeItem('todolist_current_user');
+    this.taskService.reloadForCurrentUser();
     this.router.navigateByUrl('/login');
   }
 }
