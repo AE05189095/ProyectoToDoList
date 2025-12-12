@@ -46,6 +46,11 @@ export class DashboardPage {
   // tasks es una señal
   tasks = this.taskService.tasks;
 
+  // Email del usuario actualmente autenticado (o null)
+  get currentUserEmail(): string | null {
+    return this.taskService.currentUserEmail();
+  }
+
   // Se eliminan variables de estado no utilizadas para esta vista
   // filterType: string = 'all'; 
   // hideCompleted: boolean = false; 
