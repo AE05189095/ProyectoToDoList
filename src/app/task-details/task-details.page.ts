@@ -36,9 +36,11 @@ export class TaskDetailsPage implements OnInit {
   isEditing: boolean = false;
 
   taskTypes = ['Work', 'Home', 'Business'];
+  // ensure taskTypes is typed as the Task union so template assignments keep correct type
+  taskTypesTyped: Task['type'][] = this.taskTypes as Task['type'][];
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params: any) => {
       const idString = params.get('id');
       if (idString) {
         this.taskId = +idString;

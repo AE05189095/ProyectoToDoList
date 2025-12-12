@@ -2,7 +2,7 @@ export interface Task {
   id: number;
   name: string; // <-- Aquí está como 'name'
   description: string;
-  type: 'trabajo' | 'casa' | 'negocios';
+  type: 'Work' | 'Home' | 'Business';
   completed: boolean;
   createdAt: Date;
 }

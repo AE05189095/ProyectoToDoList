@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 
 import { TaskService } from '../services/task.service';
 import { Task } from '../interfaces/task.interface';
+import { Observable } from 'rxjs';
 
 import { 
   IonContent,
@@ -43,8 +44,8 @@ export class DashboardPage {
     this.taskService.reloadForCurrentUser();
   }
 
-  // tasks es una señal
-  tasks = this.taskService.tasks;
+  // Observable de tareas para plantilla
+  tasks$: Observable<Task[]> = this.taskService.tasks.asObservable();
 
   // Email del usuario actualmente autenticado (o null)
   get currentUserEmail(): string | null {
@@ -56,15 +57,15 @@ export class DashboardPage {
   // hideCompleted: boolean = false; 
 
   get pendingCount(): number {
-    return this.tasks().filter(t => !t.completed).length;
+    return this.taskService.tasks.value.filter((t: Task) => !t.completed).length;
   }
 
   get completedCount(): number {
-    return this.tasks().filter(t => t.completed).length;
+    return this.taskService.tasks.value.filter((t: Task) => t.completed).length;
   }
 
   get deletedCount(): number {
-    return this.taskService.deleted().length;
+    return this.taskService.deleted.value.length;
   }
 
   toggleTask(task: Task) {

@@ -63,7 +63,7 @@
 
         <div class="recent-list">
           <button
-            *ngFor="let t of tasks().slice(0, 5)"
+            *ngFor="let t of (tasks$ | async)?.slice(0, 5)"
             class="recent-item"
             (click)="openDetails(t.id)"
           >
