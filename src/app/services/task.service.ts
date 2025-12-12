@@ -141,6 +141,11 @@ export class TaskService {
     return localStorage.getItem(this.CURRENT_USER_KEY);
   }
 
+  // Devuelve el email del usuario actual (público)
+  public currentUserEmail(): string | null {
+    return this.getCurrentUserEmail();
+  }
+
   // Construye la key de tasks para el usuario actual. Si no hay usuario, retorna la key global (compatibilidad).
   private getTasksKey(): string {
     const email = this.getCurrentUserEmail();
